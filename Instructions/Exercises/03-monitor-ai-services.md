@@ -23,8 +23,6 @@ Azure AI 服务是整个应用程序基础结构的关键部分。 能够监视�
 
 5. 展开 `Labfiles/03-monitor-ai-services` 文件夹。
 
-已提供适用于 C# 和 Python 的代码。 展开首选语言的文件夹。
-
 ## 预配 Azure AI 服务资源
 
 如果订阅中还没有，则需要预配 **Azure AI 服务**资源。
