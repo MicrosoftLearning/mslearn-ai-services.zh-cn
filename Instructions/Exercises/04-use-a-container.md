@@ -16,7 +16,7 @@ lab:
 
 你将使用 Visual Studio Code 开发代码。 应用程序的代码文件已在 GitHub repo 中提供。
 
-> **提示**：如果已克隆 mslearn-ai-services 存储库****，请在 Visual Studio Code 中打开它。 否则，请按照以下步骤将其克隆到开发环境中。
+> **提示**：如果已克隆 **mslearn-ai-services** 存储库，请在 Visual Studio Code 中打开它。 否则，请按照以下步骤将其克隆到开发环境中。
 
 1. 启动 Visual Studio Code。
 2. 打开面板 (SHIFT+CTRL+P) 并运行“**Git：克隆**”命令，以将 `https://github.com/MicrosoftLearning/mslearn-ai-services` 存储库克隆到本地文件夹（任意文件夹均可）。
@@ -26,8 +26,6 @@ lab:
     > **注意**：如果系统提示你添加生成和调试所需的资产，请选择**以后再说**。
 
 5. 展开 `Labfiles/04-use-a-container` 文件夹。
-
-已提供适用于 C# 和 Python 的代码。 展开首选语言的文件夹。
 
 ## 预配 Azure AI 服务资源
 
