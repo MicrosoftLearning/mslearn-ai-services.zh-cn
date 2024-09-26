@@ -22,7 +22,7 @@ lab:
 
 ### .NET Core SDK
 
-1. 从 https://dotnet.microsoft.com/download 下载并安装（下载 .NET Core SDK - 不仅是运行时）。 如果在自己的计算机上运行本课程中的实验室，则应当具有 .NET 7.0。 实验室已针对 .NET 7.0 进行了测试，但 7.0 目前不受支持。 你可以使用 8.0，但可能存在一些微小的问题。 强烈建议使用托管环境。
+1. 从 https://dotnet.microsoft.com/download 下载并安装（下载 .NET Core SDK - 不仅是运行时）。 如果在自己的计算机上运行本课程中的实验室，则应当具有 .NET 8.0。
 
 ### C++ Redistributable
 
