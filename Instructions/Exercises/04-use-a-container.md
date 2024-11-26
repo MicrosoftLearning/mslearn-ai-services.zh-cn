@@ -42,9 +42,9 @@ lab:
 4. 等待部署完成，然后查看部署详细信息。
 5. 部署资源后，转到该资源并查看其**密钥和终结点**页面。 你将在下一个过程中用到此页面中的终结点和其中一个密钥。
 
-## 安装和运行文本分析容器
+## 部署和运行情绪分析容器
 
-容器映像中提供了许多常用的 Azure AI 服务 API。 如需完整列表，请参见 [Azure AI 服务文档](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-container-support#container-availability-in-azure-cognitive-services)。 在本练习中，你将使用容器映像作为文本分析语言检测 API，但原理对于所有可用映像都是相同的。
+容器映像中提供了许多常用的 Azure AI 服务 API。 如需完整列表，请参见 [Azure AI 服务文档](https://learn.microsoft.com/en-us/azure/ai-services/cognitive-services-container-support#containers-in-azure-ai-services)。 在本练习中，你将为文本分析*情绪分享* API 使用容器映像，但原理对于所有可用映像都是相同的。
 
 1. 在 Azure 门户的“主页”上，选择“&#65291; 创建资源”按钮，搜索容器实例，然后使用以下设置创建“容器实例”资源 ：
 
@@ -53,11 +53,13 @@ lab:
         - **资源组**：选择包含 Azure AI 服务资源的资源组**
         - **容器名称**：输入唯一名称
         - **区域**：选择任何可用区域
+        - **可用性区域**：无
+        - **SKU**：标准
         - **映像源**：其他注册表
         - **映像类型**：公有
-        - **映像**：`mcr.microsoft.com/azure-cognitive-services/textanalytics/language:latest`
+        - **映像**：`mcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment:latest`
         - **OS 类型**：Linux
-        - **大小**：1 个 vCPU，12 GB 内存
+        - **大小**：1 个 vCPU，8 GB 内存
     - **网络**：
         - **网络类型**：公有
         - **DNS 名称标签**：输入容器终结点的唯一名称
@@ -73,6 +75,7 @@ lab:
             | 否 | `Eula` | `accept` |
 
         - **命令重写**：[ ]
+        - **密钥管理**：Microsoft 管理的密钥 (MMK)
     - **标记**：
         - 请勿添加任何标记
 
@@ -83,11 +86,11 @@ lab:
     - **IP 地址**：该地址是可用于访问容器实例的公共 IP 地址。
     - **FQDN：** 这是容器实例资源的完全限定的域名，你可以使用它来访问容器实例而不是 IP 地址。
 
-    > **备注**：在本练习中，你已将用于文本翻译的 Azure AI 服务容器映像部署到了 Azure 容器实例 (ACI) 资源。 可以使用类似的方法将其部署到自己计算机或网络上的 [Docker](https://www.docker.com/products/docker-desktop)** 主机上，方法是运行以下命令（在一行上），以将语言检测容器部署到本地 Docker 实例，并将“&lt;yourEndpoint&gt;”** 和“&lt;yourKey&gt;”** 分别替换为终结点 URI 和 Azure AI 服务资源的任一密钥。
+    > **备注**：在本练习中，你已将用于情绪分析的 Azure AI 服务容器映像部署到了 Azure 容器实例 (ACI) 资源。 可以使用类似的方法将其部署到自己计算机或网络上的 *[Docker](https://www.docker.com/products/docker-desktop)* 主机上，方法是运行以下命令（在一行上），以将情绪分析容器部署到本地 Docker 实例，并将 *&lt;yourEndpoint&gt;* 和 *&lt;yourKey&gt;* 分别替换为终结点 URI 和 Azure AI 服务资源的任一密钥。
     > 该命令将在本地计算机上查找映像，如果找不到映像，它将从 mcr.microsoft.com 映像注册表中拉取映像，并将其部署到 Docker 实例。 部署完成后，容器将启动并侦听端口 5000 上的传入请求。
 
     ```
-    docker run --rm -it -p 5000:5000 --memory 12g --cpus 1 mcr.microsoft.com/azure-cognitive-services/textanalytics/language:latest Eula=accept Billing=<yourEndpoint> ApiKey=<yourKey>
+    docker run --rm -it -p 5000:5000 --memory 8g --cpus 1 mcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment:latest Eula=accept Billing=<yourEndpoint> ApiKey=<yourKey>
     ```
 
 ## 使用容器
@@ -95,7 +98,7 @@ lab:
 1. 在编辑器中，打开 rest-test.cmd 并编辑其中包含的 curl 命令（如下所示），将 *&lt;your_ACI_IP_address_or_FQDN&gt;* 替换为容器的 IP 地址或 FQDN********。
 
     ```
-    curl -X POST "http://<your_ACI_IP_address_or_FQDN>:5000/text/analytics/v3.0/languages" -H "Content-Type: application/json" --data-ascii "{'documents':[{'id':1,'text':'Hello world.'},{'id':2,'text':'Salut tout le monde.'}]}"
+    curl -X POST "http://<your_ACI_IP_address_or_FQDN>:5000/text/analytics/v3.1/sentiment" -H "Content-Type: application/json" --data-ascii "{'documents':[{'id':1,'text':'The performance was amazing! The sound could have been clearer.'},{'id':2,'text':'The food and service were unacceptable. While the host was nice, the waiter was rude and food was cold.'}]}"
     ```
 
 2. 按 Ctrl+S 保存对脚本做出的更改****。 请注意，无需指定 Azure AI 服务终结点或密钥，请求将由容器化服务处理。 容器依次与 Azure 中的服务定期通信，以报告计费使用情况，但不发送请求数据。
@@ -105,7 +108,7 @@ lab:
     ./rest-test.cmd
     ```
 
-4. 验证该命令是否返回一个 JSON 文档，其中包含有关在两个输入文档中检测到的语言（该语言应为英语和法语）的信息。
+4. 验证该命令是否返回一个 JSON 文档，其中包含有关在两个输入文档中检测到的情绪（按顺序应为积极和消极）的信息。
 
 ## 清理
 
