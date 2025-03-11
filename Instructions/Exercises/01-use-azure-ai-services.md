@@ -15,7 +15,7 @@ lab:
 > **提示**：如果已克隆 **mslearn-ai-services** 存储库，请在 Visual Studio Code 中打开它。 否则，请按照以下步骤将其克隆到开发环境中。
 
 1. 启动 Visual Studio Code。
-2. 打开面板 (SHIFT+CTRL+P) 并运行“**Git：克隆**”命令，以将 `https://github.com/MicrosoftLearning/mslearn-ai-services` 存储库克隆到本地文件夹（任意文件夹均可）。
+2. 打开面板 (SHIFT+CTRL+P) 并运行“**Git：Clone**”命令，以将 `https://github.com/MicrosoftLearning/mslearn-ai-services` 存储库克隆到本地文件夹（任意文件夹均可）。
 3. 克隆存储库后，在 Visual Studio Code 中打开文件夹。
 4. 如有必要，等待其他文件安装完毕，以支持存储库中的 C# 代码项目
 
@@ -30,7 +30,7 @@ lab:
 Azure AI 服务是基于云的服务，其中封装了可合并到应用程序的人工智能功能。 可为“语言”**** 或“视觉”**** 等特定 API 预配单独的 Azure AI 服务**** 资源，也可以预配单个 Azure AI 服务资源来通过单一终结点和密钥提供对多个 Azure AI 服务 API 的访问  。 在本案例中，你将使用一个 Azure AI 服务**** 资源。
 
 1. 打开 Azure 门户 (`https://portal.azure.com`)，然后使用与你的 Azure 订阅关联的 Microsoft 帐户登录。
-2. 在顶部搜索栏中，搜索 *Azure AI 服务*，选择Azure AI 服务****，并使用以下设置创建 Azure AI 服务多服务帐户资源：
+2. 在顶部搜索栏中，搜索“*Azure AI 服务*”，选择“**Azure AI 服务多服务帐户**”，然后使用以下设置创建资源：
     - **订阅**：*Azure 订阅*
     - **资源组**：*选择或创建一个资源组（如果使用受限制的订阅，你可能无权创建新的资源组 - 请使用提供的资源组）*
     - **区域**：*选择任何可用区域*
