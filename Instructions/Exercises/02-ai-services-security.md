@@ -97,6 +97,9 @@ lab:
 
 首先，需要创建密钥保管库并为 Azure AI 服务密钥添加机密**。
 
+选择一种创建密钥保管库并添加密钥的方法：
+
+#### 使用 Azure 门户
 1. 记下 Azure AI 服务资源的 key1**** 值（或将其复制到剪贴板）。
 2. 在 Azure 门户的“主页”上，选择“&#65291; 创建资源”按钮，搜索密钥保管库，然后使用以下设置创建“密钥保管库”资源 ：
 
@@ -118,6 +121,33 @@ lab:
     - **名称**：AI-Services-Key *（必须准确匹配该名称，因为稍后你将运行基于该名称检索机密的代码）*
     - **机密值**：***key1** Azure AI 服务密钥*
 6. 选择**创建**。
+
+#### 使用 Azure CLI
+或者，可以使用 Azure CLI 来创建密钥保管库并添加机密。
+
+1. 在 Visual Studio Code 中打开终端。
+2. 通过运行以下命令，并将 `<keyVaultName>`、`<resourceGroup>` 和 `<location>` 替换为你所需的密钥保管库名称、资源组名称和 Azure 区域（例如 `eastus`），来创建密钥保管库：
+
+    ```
+    az keyvault create \
+      --name <key-vault-name> \
+      --resource-group <resource-group-name> \
+      --location <region> \
+      --sku standard \
+      --enable-rbac-authorization false
+    ```
+    标志 `--enable-rbac-authorization false` 确保权限模型设置为“保管库访问策略”（默认值）。
+
+3. 将 Azure AI 服务密钥作为机密添加到密钥保管库中。 将 `<keyVaultName>` 替换为你的密钥保管库名称，将 `<your-key1-value>` 替换为你的 Azure AI 服务密钥 1 的值：
+
+    ```
+    az keyvault secret set \
+    --vault-name <key-vault-name> \
+    --name AI-Services-Key \
+    --value <your-azure-ai-services-key>
+    ```
+
+你现已创建密钥保管库，并将 Azure AI 服务密钥存储为名为 `AI-Services-Key` 的机密。
 
 ### 创建服务主体
 
