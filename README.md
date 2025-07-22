@@ -1,4 +1,6 @@
-# 在 Azure 中开发生成式 AI 解决方案
+# 在 Azure 中开发 AI 解决方案
+
+> 注意****：此存储库正在存档，不再维护。 请访问[生成式 AI 应用](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/)学习路径和[关联的实验室存储库](https://github.com/MicrosoftLearning/mslearn-ai-studio)，或 [Azure AI Foundry 文档](https://learn.microsoft.com/en-us/azure/ai-foundry/)
 
 此存储库中的练习旨在提供动手学习体验，在其中可探索开发人员在 Microsoft Azure 上生成生成式 AI 解决方案时执行的常见任务。
 
